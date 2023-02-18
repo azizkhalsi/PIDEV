@@ -1,6 +1,8 @@
+{% extends 'back.html.twig' %}
+{% block body %}
+<center>
+<h2>liste des utilisateurs</h2>
 
-
-<h1>liste des utilisateurs</h1>
 <td><a href="{{ path('app_adduser') }}" >ajouter un utilisateur</a></td>
 
 <br>
@@ -9,14 +11,10 @@
 <table border="1">
     <tr>
         <th>id</th>
-        <th>nom</th>
-        <th>prenom</th>
-        <th>password</th>
         <th>email</th>
-        <th>image</th>
-        <th>age</th>
+        <th>password</th>
+        <th>adresse</th>
         <th>roles</th>
-
         <th>modifier</th>
         <th>supprimer</th>
 
@@ -24,13 +22,12 @@
     <tr>
         {% for i in tabuser %}
         <td>{{ i.id}}</td>
-        <td>{{ i.nom }}</td>
-        <td>{{ i.prenom}}</td>
-        <td>{{ i.password}}</td>
         <td>{{ i.email}}</td>
-        <td>{{ i.image}}</td>
-        <td>{{ i.age}}</td>
-        <td>{{ i.roles}}</td>
+        <td>{{ i.password}}</td>
+        <td>{{ i.adresse}}</td>
+        <td>{{ i.roles|json_encode  }}</td>
+
+
 
 
         <td><a href="{{ path('app_updateuser',{'id':i.id})}}" >modifier</a></td>
@@ -40,3 +37,5 @@
 
 
 </table>
+</center>
+{% endblock %}
