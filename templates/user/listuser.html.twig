@@ -1,0 +1,42 @@
+
+
+<h1>liste des utilisateurs</h1>
+<td><a href="{{ path('app_adduser') }}" >ajouter un utilisateur</a></td>
+
+<br>
+<br>
+
+<table border="1">
+    <tr>
+        <th>id</th>
+        <th>nom</th>
+        <th>prenom</th>
+        <th>password</th>
+        <th>email</th>
+        <th>image</th>
+        <th>age</th>
+        <th>roles</th>
+
+        <th>modifier</th>
+        <th>supprimer</th>
+
+    </tr>
+    <tr>
+        {% for i in tabuser %}
+        <td>{{ i.id}}</td>
+        <td>{{ i.nom }}</td>
+        <td>{{ i.prenom}}</td>
+        <td>{{ i.password}}</td>
+        <td>{{ i.email}}</td>
+        <td>{{ i.image}}</td>
+        <td>{{ i.age}}</td>
+        <td>{{ i.roles}}</td>
+
+
+        <td><a href="{{ path('app_updateuser',{'id':i.id})}}" >modifier</a></td>
+        <td><a href="{{ path('app_deleteuser',{'id':i.id})}}" >supprimer</a></td>
+    </tr>
+    {% endfor %}
+
+
+</table>
