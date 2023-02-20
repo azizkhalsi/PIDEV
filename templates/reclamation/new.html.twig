@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouvelle Reclamation{% endblock %}
+
+{% block body %}
+    {% form_theme form 'bootstrap_5_horizontal_layout.html.twig' %}
+<center >
+    <h1>Create new Reclamation</h1>
+
+    {{ include('reclamation/_form.html.twig') }}
+
+<a herf="#">Merci pour votre confiance!</a>
+</center>
+{% endblock %}
