@@ -35,6 +35,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message:"Adresse is required")]
+    #[Assert\Length(min:5 , minMessage : "L adresse doit contenir au moins {{ limit }} caractères")]
+    #[Assert\Regex(
+        pattern:"/^[a-zA-Z]+$/i",
+        message:"Nom dois etre des lettres"
+        )]
     private ?string $adresse = null;
 
 
