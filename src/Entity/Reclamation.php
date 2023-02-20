@@ -17,21 +17,21 @@ class  Reclamation
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"numtel is required")]
+    #[Assert\NotBlank(message:"your name is required")]
     private ?string $Name = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotBlank(message:"numtel is required")]
+    #[Assert\NotBlank(message:"your mail is required")]
     #[Assert\Email(message:"The email '{{ value }}' is not a valid email ")]
     private ?string $Mail = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     //controle saisie date
-    #[Assert\NotBlank(message:"numtel is required")]
+    #[Assert\NotBlank(message:"the date is required")]
     private ?\DateTimeInterface $Date = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotBlank(message:"numtel is required")]
+    #[Assert\NotBlank(message:"a description is required")]
     private ?string $Description = null;
 
     #[ORM\ManyToOne(inversedBy: 'reclamation')]
