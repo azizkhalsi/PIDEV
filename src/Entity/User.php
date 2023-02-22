@@ -31,6 +31,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\NotBlank(message:"Password is required")]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
@@ -38,7 +39,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Length(min:5 , minMessage : "L adresse doit contenir au moins {{ limit }} caractères")]
     #[Assert\Regex(
         pattern:"/^[a-zA-Z]+$/i",
-        message:"Nom dois etre des lettres"
+        message:"l adresse dois etre des lettres"
         )]
     private ?string $adresse = null;
 
