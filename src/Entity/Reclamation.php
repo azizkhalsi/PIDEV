@@ -6,8 +6,7 @@ use App\Repository\ReclamationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
-
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ReclamationRepository::class)]
 class  Reclamation
@@ -15,24 +14,29 @@ class  Reclamation
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("reclamations")]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message:"your name is required")]
+    #[Assert\NotBlank(message:"numtel is required")]
+    #[Groups("reclamations")]
     private ?string $Name = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotBlank(message:"your mail is required")]
+    #[Groups("reclamations")]
+    #[Assert\NotBlank(message:"numtel is required")]
     #[Assert\Email(message:"The email '{{ value }}' is not a valid email ")]
     private ?string $Mail = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups("reclamations")]
     //controle saisie date
-    #[Assert\NotBlank(message:"the date is required")]
+    #[Assert\NotBlank(message:"numtel is required")]
     private ?\DateTimeInterface $Date = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Assert\NotBlank(message:"a description is required")]
+    #[Groups("reclamations")]
+    #[Assert\NotBlank(message:"numtel is required")]
     private ?string $Description = null;
 
     #[ORM\ManyToOne(inversedBy: 'reclamation')]

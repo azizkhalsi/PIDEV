@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/recyclage_pidev.iml" filepath="$PROJECT_DIR$/.idea/recyclage_pidev.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/PiDev.iml" filepath="$PROJECT_DIR$/.idea/PiDev.iml" />
     </modules>
   </component>
 </project>
