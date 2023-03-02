@@ -19,6 +19,15 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
+
+    public function findStudentByNsc($adresse){
+        return $this->createQueryBuilder("s")
+           ->where('s.adresse LIKE :adresse')
+           ->setParameter('adresse', '%'.$adresse.'%')
+           ->getQuery()
+           ->getResult();
+        }
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);

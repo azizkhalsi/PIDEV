@@ -12,11 +12,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 class UserController extends AbstractController
 {
+
+   
+    #[Route("/recherche_ajax", name: "recherche_ajax")]
+
+    public function rechercheAjax(Request $request,UserRepository $sr): JsonResponse
+    {
+        $requestString = $request->query->get('searchValue');
+        $resultats = $sr->findStudentByNsc($requestString);
+
+        return $this->json($resultats);
+    }
+    
     #[Route('/user', name: 'app_user')]
     public function index(): Response
     {
@@ -30,6 +42,7 @@ class UserController extends AbstractController
         $user=$repository->findAll();
 
 
+        //* Nous renvoyons une réponse Http qui prend en paramètre un tableau en format JSON
 
         return $this->render("user/listuser.html.twig",array("tabuser"=>$user));
 
@@ -48,8 +61,9 @@ class UserController extends AbstractController
         }
         return $this->renderForm("user/adduser.html.twig",
             array("formUser"=>$form));
+
     }
-    #[Route('/updateuser/{id}', name: 'app_updateuser')]
+    #[Route('/{id}/updateuser', name: 'app_updateuser')]
     public function updateuser(\Doctrine\Persistence\ManagerRegistry $doctrine,Request $request,UserRepository $repository,$id){
 
         $user=$repository->find($id);
@@ -64,13 +78,14 @@ class UserController extends AbstractController
 
     }
 
-    #[Route('/deleteuser/{id}', name: 'app_deleteuser')]
+    #[Route('/{id}/deleteuser', name: 'app_deleteuser')]
     public function deleteuser(UserRepository $repository,$id,\Doctrine\Persistence\ManagerRegistry $doctrine){
         $user=$repository->find($id);
         $em=$doctrine->getManager();
         $em->remove($user);
         $em->flush();
         return $this->redirectToRoute("app_Listuser");
+
     }
 
 
