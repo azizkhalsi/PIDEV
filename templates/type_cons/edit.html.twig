@@ -1,0 +1,13 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Edit TypeCons{% endblock %}
+
+{% block body %}
+    <h1>Edit TypeCons</h1>
+
+    {{ include('type_cons/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_type_cons_index') }}">back to list</a>
+
+    {{ include('type_cons/_delete_form.html.twig') }}
+{% endblock %}

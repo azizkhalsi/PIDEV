@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Conseil{% endblock %}
+
+{% block body %}
+{{form_start(form,{'attr':{'novalidate' : 'novalidate'}} )}}
+{% form_theme form 'bootstrap_5_horizontal_layout.html.twig' %} 
+<center >
+    <h1>Create new Conseil</h1>
+
+    {{ include('conseil/_form.html.twig') }}
+
+    <a class="btn btn-lg btn-primary" href="{{ path('app_conseil_index') }}">back to list</a>
+    </centre>
+{% endblock %}

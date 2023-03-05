@@ -34,6 +34,15 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('username',TextType::class, [
+                'attr' => ['placeholder' => 'username',
+                'class'=>"form-control-file"],
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'You should add your username.',
+                    ]),
+                ],
+            ])
             ->add('adresse',TextType::class, [
                 'attr' => ['placeholder' => 'adresse',
                 'class'=>"form-control-file"],

@@ -1,0 +1,26 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}TypeCons{% endblock %}
+
+{% block body %}
+    <h1>TypeCons</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ type_con.id }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ type_con.type }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_type_cons_index') }}">back to list</a>
+
+    <a href="{{ path('app_type_cons_edit', {'id': type_con.id}) }}">edit</a>
+
+    {{ include('type_cons/_delete_form.html.twig') }}
+{% endblock %}

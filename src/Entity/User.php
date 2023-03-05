@@ -9,6 +9,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Groups;
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -17,20 +19,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups("users")]
     private ?int $id = null;
+
+    #[ORM\Column]
+    #[Groups("users")]
+    private ?string $username = null;
 
     #[ORM\Column(length: 180, unique: true)]
     #[Assert\NotBlank(message:"Email name is required")]
     #[Assert\Email(message:"The email '{{ value }}' is not a valid email ")]
+    #[Groups("users")]
     private ?string $email = null;
 
     #[ORM\Column]
+    #[Groups("users")]
     private array $roles = [];
 
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Groups("users")]
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
@@ -40,6 +50,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         pattern:"/^[a-zA-Z]+$/i",
         message:"l adresse dois etre des lettres"
         )]
+        #[Groups("users")]
     private ?string $adresse = null;
 
 
@@ -61,6 +72,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+
+        return $this;
+    }
     /**
      * A visual identifier that represents this user.
      *
@@ -74,11 +96,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @deprecated since Symfony 5.3, use getUserIdentifier instead
      */
-    public function getUsername(): string
-    {
-        return (string) $this->email;
-    }
-
+  
     /**
      * @see UserInterface
      */
