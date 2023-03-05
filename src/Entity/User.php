@@ -9,11 +9,16 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 use Symfony\Component\Serializer\Annotation\Groups;
 
 =======
 >>>>>>> GestionUser
+=======
+use Symfony\Component\Serializer\Annotation\Groups;
+
+>>>>>>> Stashed changes
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -22,6 +27,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+<<<<<<< Updated upstream
 <<<<<<< HEAD
     #[Groups("users")]
     private ?int $id = null;
@@ -39,25 +45,41 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     #[Groups("users")]
 =======
+=======
+    #[Groups("users")]
+>>>>>>> Stashed changes
     private ?int $id = null;
+
+    #[ORM\Column]
+    #[Groups("users")]
+    private ?string $username = null;
 
     #[ORM\Column(length: 180, unique: true)]
     #[Assert\NotBlank(message:"Email name is required")]
     #[Assert\Email(message:"The email '{{ value }}' is not a valid email ")]
+    #[Groups("users")]
     private ?string $email = null;
 
     #[ORM\Column]
+<<<<<<< Updated upstream
 >>>>>>> GestionUser
+=======
+    #[Groups("users")]
+>>>>>>> Stashed changes
     private array $roles = [];
 
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
+<<<<<<< Updated upstream
 <<<<<<< HEAD
     #[Groups("users")]
 =======
 >>>>>>> GestionUser
+=======
+    #[Groups("users")]
+>>>>>>> Stashed changes
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
@@ -67,10 +89,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         pattern:"/^[a-zA-Z]+$/i",
         message:"l adresse dois etre des lettres"
         )]
+<<<<<<< Updated upstream
 <<<<<<< HEAD
         #[Groups("users")]
 =======
 >>>>>>> GestionUser
+=======
+        #[Groups("users")]
+>>>>>>> Stashed changes
     private ?string $adresse = null;
 
 
@@ -92,7 +118,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+<<<<<<< Updated upstream
 <<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
     public function getUsername(): ?string
     {
         return $this->username;
@@ -104,8 +133,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+<<<<<<< Updated upstream
 =======
 >>>>>>> GestionUser
+=======
+>>>>>>> Stashed changes
     /**
      * A visual identifier that represents this user.
      *
@@ -119,6 +151,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @deprecated since Symfony 5.3, use getUserIdentifier instead
      */
+<<<<<<< Updated upstream
 <<<<<<< HEAD
   
 =======
@@ -128,6 +161,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 >>>>>>> GestionUser
+=======
+  
+>>>>>>> Stashed changes
     /**
      * @see UserInterface
      */
