@@ -40,7 +40,7 @@ class ConseilRepository extends ServiceEntityRepository
         }
     }
 
-    public function findStudentByNsc($typecons){
+    public function findConseil($typecons){
         return $this->createQueryBuilder("s")
            ->where('s.typecons LIKE :typecons')
            ->setParameter('typecons', '%'.$typecons.'%')

@@ -16,11 +16,11 @@ class ConseilController extends AbstractController
 {
 
    
-    #[Route('/recherche_ajax', name :'recherche_ajax')]
-    public function rechercheAjax(Request $request,ConseilRepository $sr): JsonResponse
+    #[Route('/rechercheAjaxConseil', name :'rechercheAjaxConseil')]
+    public function rechercheAjaxConseil(Request $request,ConseilRepository $sr): JsonResponse
     {
         $requestString = $request->query->get('searchValue');
-        $resultats = $sr->findStudentByNsc($requestString);
+        $resultats = $sr->findConseil($requestString);
 
         return $this->json($resultats);
     }

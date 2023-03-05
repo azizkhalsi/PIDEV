@@ -4,23 +4,24 @@
 <h2>liste des Conseil</h2>
 
 
-
-
+<br>
+<br>
 <input type="text" id="search" class="form-control" placeholder="Search">
 <div>
     <table  id="t" class="table table-hover ">
         <thead class="thead-dark">
             <tr>
-                <th>Description</th>
+                 <th>Description</th>
                 <th>Typecons</th>
             </tr>
         </thead>
         <tbody id="all">
             {% for i in conseils %}
             <tr>
-            <td>{{ i.description }}</td>
+           <td>{{ i.description }}</td>
                 <td>{{ i.typecons }}</td>
             
+           
 
             </tr>
             {% endfor %}
@@ -45,7 +46,7 @@
             $.ajax({
                 /* l’url est une chaine de caractères contenant l’adresse où la requête est
                 envoyée */
-                url: "{{ path('recherche_ajax') }}",
+                url: "{{ path('rechercheAjaxConseil') }}",
                 /* La méthode utilisée pour transférer les données est GET */
                 type: 'GET',
                 /*Ici search value va prendre la chaine entrée par un utilisateur dans la
@@ -60,7 +61,7 @@
                         $('#t tbody#searchtab').empty();
                         $.each(resultats, function(i, obj) {
                             $('#t tbody#all').hide();
-                            $('#t tbody#searchtab').append('<tr><td> ' + obj.description +'</td><td> '+obj.typecons+'</td>    </tr>');
+                            $('#t tbody#searchtab').append('<tr><td> ' + obj.description  +'</td><td> '+obj.typecons+'</td>   </tr>');
                         });
                     }
 
