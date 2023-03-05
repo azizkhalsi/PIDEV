@@ -9,8 +9,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+<<<<<<< HEAD
 use Symfony\Component\Serializer\Annotation\Groups;
 
+=======
+>>>>>>> GestionUser
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -19,6 +22,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+<<<<<<< HEAD
     #[Groups("users")]
     private ?int $id = null;
 
@@ -34,13 +38,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     #[Groups("users")]
+=======
+    private ?int $id = null;
+
+    #[ORM\Column(length: 180, unique: true)]
+    #[Assert\NotBlank(message:"Email name is required")]
+    #[Assert\Email(message:"The email '{{ value }}' is not a valid email ")]
+    private ?string $email = null;
+
+    #[ORM\Column]
+>>>>>>> GestionUser
     private array $roles = [];
 
     /**
      * @var string The hashed password
      */
     #[ORM\Column]
+<<<<<<< HEAD
     #[Groups("users")]
+=======
+>>>>>>> GestionUser
     private ?string $password = null;
 
     #[ORM\Column(length: 255)]
@@ -50,7 +67,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         pattern:"/^[a-zA-Z]+$/i",
         message:"l adresse dois etre des lettres"
         )]
+<<<<<<< HEAD
         #[Groups("users")]
+=======
+>>>>>>> GestionUser
     private ?string $adresse = null;
 
 
@@ -72,6 +92,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+<<<<<<< HEAD
     public function getUsername(): ?string
     {
         return $this->username;
@@ -83,6 +104,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+=======
+>>>>>>> GestionUser
     /**
      * A visual identifier that represents this user.
      *
@@ -96,7 +119,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @deprecated since Symfony 5.3, use getUserIdentifier instead
      */
+<<<<<<< HEAD
   
+=======
+    public function getUsername(): string
+    {
+        return (string) $this->email;
+    }
+
+>>>>>>> GestionUser
     /**
      * @see UserInterface
      */

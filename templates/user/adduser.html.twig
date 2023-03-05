@@ -1,0 +1,8 @@
+{% extends 'back.html.twig' %}
+{% block body %}
+{% form_theme formUser 'bootstrap_5_horizontal_layout.html.twig' %} 
+<center >
+<h2>ajouter utilisateur</h2>
+{{ form(formUser) }}
+</center>
+{% endblock %}

@@ -34,6 +34,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+<<<<<<< HEAD
             ->add('username',TextType::class, [
                 'attr' => ['placeholder' => 'username',
                 'class'=>"form-control-file"],
@@ -43,6 +44,8 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+=======
+>>>>>>> GestionUser
             ->add('adresse',TextType::class, [
                 'attr' => ['placeholder' => 'adresse',
                 'class'=>"form-control-file"],
