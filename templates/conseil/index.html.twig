@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conseil index{% endblock %}
+
+{% block body  %}
+<center >
+    <h1>Conseil index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                
+                <th>Description</th>
+                <th>Typecons</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for conseil in conseils %}
+            <tr>
+               
+                <td>{{ conseil.description }}</td>
+                <td>{{ conseil.typecons }}</td>
+                <td>
+                    <a href="{{ path('app_conseil_show', {'id': conseil.id}) }}">show</a>
+                    <a href="{{ path('app_conseil_edit', {'id': conseil.id}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a class="btn btn-lg btn-primary"  href="{{ path('app_conseil_new') }}">Demander une nouvelle conseil</a>
+
+    </centre>
+{% endblock %}

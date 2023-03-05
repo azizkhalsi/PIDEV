@@ -14,6 +14,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+
 
 class UserController extends AbstractController
 {
@@ -72,6 +77,108 @@ class UserController extends AbstractController
         $em->flush();
         return $this->redirectToRoute("app_Listuser");
     }
+
+//========================================================partie json================================//
+
+#[Route("/AllUser", name: "list")]
+//* Dans cette fonction, nous utilisons les services NormlizeInterface et StudentRepository, 
+//* avec la méthode d'injection de dépendances.
+public function getUsers(UserRepository $repo, SerializerInterface $serializer)
+{
+    $users = $repo->findAll();
+    //* Nous utilisons la fonction normalize qui transforme le tableau d'objets 
+    //* students en  tableau associatif simple.
+    // $studentsNormalises = $normalizer->normalize($students, 'json', ['groups' => "students"]);
+
+    // //* Nous utilisons la fonction json_encode pour transformer un tableau associatif en format JSON
+    // $json = json_encode($studentsNormalises);
+
+    $json = $serializer->serialize($users, 'json', ['groups' => "users"]);
+
+    //* Nous renvoyons une réponse Http qui prend en paramètre un tableau en format JSON
+    return new Response($json);
+}
+
+#[Route("/User/{id}", name: "user")]
+public function UserId($id, NormalizerInterface $normalizer, UserRepository $repo)
+{
+    $user = $repo->find($id);
+    $UserNormalises = $normalizer->normalize($user, 'json', ['groups' => "users"]);
+    return new Response(json_encode($userNormalises));
+}
+
+
+#[Route("/register1", name: "addUserJSON", methods: ['GET'])]   
+public function addUserJSON(Request $req,  SerializerInterface $serializer)
+{
+
+    $em = $this->getDoctrine()->getManager();
+    $user = new User();
+
+    $user->setUsername($req->get('username'));
+    $user->setEmail($req->get('email'));
+    $user->setadresse($req->get('adresse'));
+    $user->setPassword($req->get('password'));
+    $em->persist($user);
+    $em->flush();
+
+
+  // $json = $serializer->serialize($data, 'json');
+    $jsonContent = $serializer->serialize($user, 'json', ['groups' => 'users']);
+    return new Response(json_encode($jsonContent));
+}
+
+#[Route("updateUserJSON/{id}", name: "updateUserJSON")]
+public function updateUserJSON(\Doctrine\Persistence\ManagerRegistry $doctrine,Request $request, $id, NormalizerInterface $Normalizer)
+{
+
+    $user=$repository->find($id);
+    $form=$this->createForm(UserType::class,$user);
+    $form->handleRequest($request);
+    if($form->isSubmitted() && $form->isValid()) {
+        $em = $doctrine->getManager();
+        $em->flush();
+    }
+
+    $jsonContent = $Normalizer->normalize($user, 'json', ['groups' => 'users']);
+    return new Response("user updated successfully " . json_encode($jsonContent));
+}
+
+#[Route("deleteUserJSON/{id}", name: "deleteUserJSON")]
+public function deleteUserJSON(Request $req, $id, NormalizerInterface $Normalizer)
+{
+
+    $em = $this->getDoctrine()->getManager();
+    $user = $em->getRepository(User::class)->find($id);
+    $em->remove($User);
+    $em->flush();
+    $jsonContent = $Normalizer->normalize($user, 'json', ['groups' => 'users']);
+    return new Response("User deleted successfully " . json_encode($jsonContent));
+}
+  #[Route("signin", name: "app_signin")]
+    public function signinAction(Request $request)
+    {
+
+       $email=$request->query->get("email");
+       $password=$request->query->get("password");
+
+       $em=$this->getDoctrine()->getManager();
+       $user =$em->getRepository(User::class)->findOneBy(['email'=>$email]);
+
+       if($user){
+        if(password_verify($password,$user->getPassword())){
+            $serializer = new Serializer([new ObjectNormalizer()]);
+            $formatted = $serializer->normalize($user);
+            return new JsonResponse($formatted);
+        }
+                 else {
+                   return new Response("password not found");
+                    }           
+       }
+       else {
+        return new Response("user not found");
+         }
+    } 
 
 
 

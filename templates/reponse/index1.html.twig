@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vous Reponse{% endblock %}
+
+{% block body %}
+    <h1>Vous Reponse</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+               
+                <th>Reponse</th>
+               
+            </tr>
+        </thead>
+        <tbody>
+        {% for reponse in reponses %}
+            <tr>
+               
+                <td>{{ reponse.contenu }}</td>
+                <td>       
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    
+{% endblock %}

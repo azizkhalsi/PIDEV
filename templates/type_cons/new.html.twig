@@ -1,0 +1,11 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}New TypeCons{% endblock %}
+
+{% block body %}
+    <h1>Create new TypeCons</h1>
+
+    {{ include('type_cons/_form.html.twig') }}
+
+    <a href="{{ path('app_type_cons_index') }}">back to list</a>
+{% endblock %}
