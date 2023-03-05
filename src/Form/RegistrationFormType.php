@@ -34,10 +34,6 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-<<<<<<< Updated upstream
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
             ->add('username',TextType::class, [
                 'attr' => ['placeholder' => 'username',
                 'class'=>"form-control-file"],
@@ -47,11 +43,6 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-<<<<<<< Updated upstream
-=======
->>>>>>> GestionUser
-=======
->>>>>>> Stashed changes
             ->add('adresse',TextType::class, [
                 'attr' => ['placeholder' => 'adresse',
                 'class'=>"form-control-file"],
