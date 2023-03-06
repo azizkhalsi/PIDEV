@@ -53,6 +53,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         #[Groups("users")]
     private ?string $adresse = null;
 
+    #[ORM\ManyToOne(inversedBy: 'userAdresse')]
+    private ?Livraison $livraison = null;
+
 
 
     public function getId(): ?int
@@ -162,6 +165,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+   
+
+    public function __toString()
+    {
+        return(string)$this->getUsername();
+    }
+
+    public function getLivraison(): ?Livraison
+    {
+        return $this->livraison;
+    }
+
+    public function setLivraison(?Livraison $livraison): self
+    {
+        $this->livraison = $livraison;
+
+        return $this;
+    }
+
 
 
 }

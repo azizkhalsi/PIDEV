@@ -60,8 +60,7 @@ class TypeCons
 
         return $this;
     }
-/*
-    public function removeConseil(Conseil $conseil): self
+/*   public function removeConseil(Conseil $conseil): self
     {
         if ($this->conseils->removeElement($conseil)) {
             // set the owning side to null (unless already changed)

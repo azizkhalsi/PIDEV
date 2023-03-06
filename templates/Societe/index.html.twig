@@ -1,0 +1,85 @@
+{% extends 'back.html.twig' %}
+{% block body %}
+<center>
+<h2>liste des Societes</h2>
+<td><a href="{{ path('app_Societe_new') }}">Ajouter une nouvelle societé</a></td>
+
+
+<input type="text" id="search" class="form-control" placeholder="Search">
+<div>
+    <table  id="t" class="table table-hover ">
+        <thead class="thead-dark">
+            <tr>
+                <th>numtel</th>
+                <th>adresse</th>
+                <th>nom de societe</th>
+                 <th>categorie</th>
+                <th>action</th>
+            </tr>
+        </thead>
+        <tbody id="all">
+            {% for i in Societes %}
+            <tr>
+           <td>{{ i.numtel }}</td>
+                <td>{{ i.adresse }}</td>
+                <td>{{ i.nomdesociete }}</td>
+                <td>{{ i.categories }}</td>
+            
+          
+
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tbody id="searchtab">
+        </tbody>
+    </table>
+</div>
+
+<script src="{{ asset('https://code.jquery.com/jquery-3.5.1.min.js') }}"></script>
+
+<script>
+    $( document ).ready(function () {
+        $("#search").keyup(function (e) {
+            /* La variable value va prendre la valeur insérer dans le champ de texte
+            afin d'effectuer la recherche */
+            var value = $(this).val();
+            /* Ajax est lancé lors du remplissage du champ texte dont l'id est
+            « search » pour faire la recherche */
+
+            $.ajax({
+                /* l’url est une chaine de caractères contenant l’adresse où la requête est
+                envoyée */
+                url: "{{ path('recherche_ajaxsociete') }}",
+                /* La méthode utilisée pour transférer les données est GET */
+                type: 'GET',
+                /*Ici search value va prendre la chaine entrée par un utilisateur dans la
+                zone de recherche et sera placée après l’url */
+                data: {
+                    'searchValue' : value
+                },
+                /*Cette fonction permet de vider le contenu du tableau pour recevoir le
+                nouveau contenu*/
+                success: function (resultats) {
+                    if (resultats) {
+                        $('#t tbody#searchtab').empty();
+                        $.each(JSON.parse(resultats), function(i, obj) {
+                            $('#t tbody#all').hide();
+                            $('#t tbody#searchtab').append('<tr><td> ' + obj.numtel  +'</td><td> '+obj.adresse+'</td><td> '+obj.nomdesociete+ '</td><td> '+obj.categories+ '</td>  </tr>');
+                        });
+                    }
+
+                    else {
+                        $('#t tbody#all').show();
+                        $('#t tbody#searchtab').empty();
+                        $('#t tbody#searchtab').fadeIn();
+                    }
+                },
+            });
+            return false;
+        });
+
+    });
+
+</script>
+</center>
+{% endblock %}

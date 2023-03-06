@@ -1,0 +1,16 @@
+{% extends 'back.html.twig' %}
+
+{% block title %}Edit Type{% endblock %}
+
+{% block body %}
+{% form_theme form 'bootstrap_5_horizontal_layout.html.twig' %} 
+    <center>
+    <h1>Edit type</h1>
+
+    {{ include('type/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_type_index') }}">back to list</a>
+
+    {{ include('type/_delete_form.html.twig') }}
+</centre>
+{% endblock %}

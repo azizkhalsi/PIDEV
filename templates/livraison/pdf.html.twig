@@ -1,0 +1,36 @@
+{% extends 'pdfinterface.html.twig' %}
+
+{% block body %}
+<center>
+  <div class="table-responsive">
+<style>
+  th, td {
+  padding: 50px;
+}
+</style>
+    <table border ="6" id="t" class="table table-hover ">
+      <thead >
+        <tr>
+          <th>ID</th>
+          <th>Quantité</th>
+          <th>Etat</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for livraison in livraisons %}
+          <tr>
+            <td >
+        {{ livraison.id }}</td>
+            <td >
+        {{ livraison.quantite }}</td>
+            <td >
+        {{ livraison.etat }}</td>
+          </tr>
+        {% endfor %}
+        
+      </tbody>
+    </table>
+  </div>
+  <center>
+{% endblock %}
+

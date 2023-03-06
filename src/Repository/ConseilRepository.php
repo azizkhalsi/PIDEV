@@ -51,20 +51,20 @@ class ConseilRepository extends ServiceEntityRepository
 
     public  function sms(){
         // Your Account SID and Auth Token from twilio.com/console
-                $sid = 'ACd1d40e21b7583e6f59329c0efbe03b0e';
-                $auth_token = 'f7aabae16db8ef9cfca7ce0ed8fd888f';
+                $sid = 'ACa5a718aefdcf93411a70fecc367c6879';
+                $auth_token = 'ded8fb54f68c11b7ce8b93a81b3c9880';
         // In production, these should be environment variables. E.g.:
         // $auth_token = $_ENV["TWILIO_AUTH_TOKEN"]
         // A Twilio number you own with SMS capabilities
-                $twilio_number = "+15673716211";
+                $twilio_number = "+15674092369";
         
                 $client = new Client($sid, $auth_token);
                 $client->messages->create(
                 // the number you'd like to send the message to
-                    '+21655382991',
+                    '++21655382991',
                     [
                         // A Twilio phone number you purchased at twilio.com/console
-                        'from' => '+15673716211',
+                        'from' => '+15674092369',
                         // the body of the text message you'd like to send
                         'body' => 'votre conseil a été traité merci de nous contacter pour plus de détail!'
                     ]

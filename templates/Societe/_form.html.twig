@@ -1,0 +1,6 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+                 {{form_start(form,{'attr':{'novalidate' : 'novalidate'}} )}}
+
+    <button href="{{ path('app_Societe_client') }}"  class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

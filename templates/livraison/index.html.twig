@@ -1,0 +1,94 @@
+{% extends 'back.html.twig' %}
+{% block body %}
+<h1 id="dd1"> Liste des Livraisons</h1>
+
+<input type="text" id="search" class="form-control" placeholder="Search">
+<div>
+<table border ="3" id="t" class="table table-hover ">
+  <thead class="thead-dark">
+  <tr>
+   <td >ID</td>
+   <td >quantite</td>
+   <td >Etat</td>
+   <td >Type</td>
+   <td >Actions</td>
+</tr>
+</thead>
+<tbody id="all">
+    {% for i in livraisons %}
+<tr>
+   <td>
+{{ i.id }}
+   </td>
+   <td>
+{{ i.quantite }}
+   </td>
+   <td>
+{{ i.etat }}
+   </td>
+   <td>
+    {{ i.types }}
+       </td>
+
+<td>
+<a href="{{ path('app_livraison_editadmin', {'id': i.id}) }}"> modifier</a>
+
+<a href="{{ path('pdf', {'id': i.id}) }}"> pdf</a>
+   </td> 
+</tr>
+{% endfor %}
+</tbody>
+<tbody id="searchtab">
+</tbody>
+
+
+                  
+
+</div>
+</table>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$( document ).ready(function() {
+        $("#search").keyup(function(e){
+            var value = $(this).val();
+      
+                         $.ajax({
+          
+                            url : "{{ path('searchLivraison') }}",
+     
+                            type : 'GET', 
+                         
+                            data: {
+                                    'searchValue' : value
+                                },
+         
+                            success: function(retour){
+                              if(retour){
+                          $('#t tbody#searchtab').empty();
+                          $.each(JSON.parse(retour), function(i, obj) {
+                          $('#t tbody#all').hide();
+                          $('#t tbody#searchtab').append('<tr><td>'+obj.id+'</td><td>'+obj.quantite+'</td><td>'+obj.etat+' </td><td>'+obj.types+' </td>><td><a href="updateStudent/'+obj.id+'">modifier</a> </br><a href="deleteStudent/'+obj.id+'">supprimer</a></td></tr>');
+                          });
+                              }
+                              else
+                              {
+               $('#t tbody#all').show();
+               $('#t tbody#searchtab').emty();
+               $('#t tbody#searchtab').fadeIn();
+                                 }
+             },
+                    });
+                    return false;
+                    });
+                });
+                
+                    </script>
+
+  <div class="flex justify-center align-items flex-row">
+    <a href="https://www.facebook.com/sharer/sharer.php?u=%7B%7B absolute_url(path('app_livraison_index', {id: i.id})) }}" class="share facebook">
+        <svg class="w-3 h-3 text-blue-600 fill-current mr-4 icon-facebook" xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="width: 20px; height: 20px;">
+            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+    </a>
+  {% endblock %}

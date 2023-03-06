@@ -27,6 +27,9 @@ class Conseil
     #[ORM\JoinColumn(nullable: false)]
     private ?TypeCons $typeCons = null;
 
+    #[ORM\ManyToOne]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -57,6 +60,18 @@ class Conseil
     }
     public function __toString()
     {
-        return(string)$this->getDescription();
+        return(string)$this->getTypecons();
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 }

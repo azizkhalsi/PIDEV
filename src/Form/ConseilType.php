@@ -14,6 +14,8 @@ class ConseilType extends AbstractType
         $builder
         ->add('typeCons')
         ->add('Description')
+        ->add('user')
+        
         
             
         ;

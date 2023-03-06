@@ -170,7 +170,7 @@ public function deleteUserJSON(Request $req, $id, NormalizerInterface $Normalize
     $jsonContent = $Normalizer->normalize($user, 'json', ['groups' => 'users']);
     return new Response("User deleted successfully " . json_encode($jsonContent));
 }
-  #[Route("signin", name: "app_signin")]
+  /*#[Route("signin", name: "app_signin")]
     public function signinAction(Request $request)
     {
 
@@ -194,7 +194,7 @@ public function deleteUserJSON(Request $req, $id, NormalizerInterface $Normalize
         return new Response("user not found");
          }
     } 
-
+*/
 
 
 }
